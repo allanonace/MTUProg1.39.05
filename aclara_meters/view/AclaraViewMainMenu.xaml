@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<util:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:util="clr-namespace:aclara_meters.util;assembly=aclara_meters"
+                NavigationPage.HasBackButton="false" BackgroundColor="Black"
+                xmlns:Controls="clr-namespace:aclara_meters"
+                x:Class="aclara_meters.view.AclaraViewMainMenu"
+                xmlns:views="clr-namespace:aclara_meters.view;assembly=aclara_meters">
+    <RelativeLayout IsVisible="true">
+        <RelativeLayout.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
+            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
+        </RelativeLayout.GestureRecognizers>
+        <ContentView BackgroundColor="White" WidthRequest="1500" x:Name="fondo" IsVisible="true" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                 Property=Height,&#xA;                                 Factor=0}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                 Property=Height,&#xA;                                 Factor=1}">
+        </ContentView>
+        <!--  background_scan_page_detail  -->
+        <ContentView IsVisible="false" x:Name="background_scan_page_detail" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Width,&#xA;                                     Factor=0}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Width,&#xA;                                     Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Height,&#xA;                                     Factor=0}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Height,&#xA;                                     Factor=1}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="menu_controller_width_detail" Width="0" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Opacity="1" BackgroundColor="White" Grid.Row="0" Grid.Column="1" Margin="-6,0,0,0" Orientation="Vertical">
+                    <StackLayout BackgroundColor="White" Margin="0">
+                        <StackLayout Margin="0,0,0,0">
+                            <StackLayout Margin="0,0,0,0" HeightRequest="92" BackgroundColor="#6aa2b8">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Margin="0,0,0,0" WidthRequest="60" Orientation="Horizontal" HorizontalOptions="Start">
+                                        <Image x:Name="hamburger_icon_detail" Margin="4,24,0,0" HeightRequest="56" Scale="1" Source="hamburger_icon.png" HorizontalOptions="Start">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="back_button_detail" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image x:Name="hamburger_icon_home_detail" IsVisible="false" Margin="4,24,0,0" HeightRequest="56" WidthRequest="1" Scale="1" Source="back_menu_puck.png" HorizontalOptions="Start">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="back_button_home_detail" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                    <StackLayout   Margin="0,24,0,0" HorizontalOptions="CenterAndExpand"  Orientation="Vertical">
+                                        <Image x:Name="aclara_detail_logo" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Scale="1" WidthRequest="149" HeightRequest="35" IsEnabled="false" Source="logo.png">
+                                        </Image>
+                                    </StackLayout>
+                                    <!--<StackLayout Margin="-20,34,-20,-44" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Image x:Name="aclara_detail_logo" Scale="1" WidthRequest="256" HeightRequest="128" IsEnabled="false" Margin="0,-64,0,0" Source="aclara_logo_menu.png">
+                                        </Image>
+                                    </StackLayout>-->
+                                    <StackLayout Margin="0,24,10,0" Orientation="Horizontal" HorizontalOptions="End">
+                                        <Image x:Name="battery_level_detail" Margin="0,4,0,0" HeightRequest="32" WidthRequest="32" Scale="1" Source="battery_toolbar_high_white.png">
+                                        </Image>
+                                        <Image x:Name="rssi_level_detail" Margin="6,4,0,0" HeightRequest="20" WidthRequest="20" Scale="1" Source="rssi_toolbar_high_white.png">
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Image HeightRequest="64" Margin="260,12,10,-48" x:Name="block_ble_disconnect" Source="ble_puck_disc_icon">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="disconnectDevice" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <StackLayout Margin="0,36,0,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" x:Name="block_ble" Scale="0.95">
+                        <RelativeLayout Scale="1" HorizontalOptions="Center">
+                            <StackLayout Margin="0,-24,0,0" Padding="48">
+                                <StackLayout Orientation="Vertical" WidthRequest="268" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Image Source="ble_puck_icon.png" />
+                                    <Label HorizontalOptions="Center" FontSize="32" Text="Device 1" x:Name="deviceID">
+                                    </Label>
+                                    <Label HorizontalOptions="Center" IsVisible="true" Margin="4,-4,0,0" FontSize="22" Text="34:32:45:76:98" HorizontalTextAlignment="Center" x:Name="macAddress">
+                                    </Label>
+                                    <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Image Source="battery_toolbar_high" HeightRequest="34" x:Name="imageBattery" VerticalOptions="Center" />
+                                        <Label Margin="-2,2,0,-2" Text="100 %" x:Name="batteryLevel" FontSize="14" VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Image Source="rssi_toolbar_high" HeightRequest="20" x:Name="imageRssi" VerticalOptions="Center" />
+                                        <Label Margin="0,2,0,0" Text="-56 dBm" x:Name="rssiLevel" FontSize="14" VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </RelativeLayout>
+                    </StackLayout>
+                    <!--  Aqui va la listview -->
+                </StackLayout>
+            </Grid>
+        </ContentView>
+        <!--  background_scan_page  -->
+        <ContentView IsVisible="true" x:Name="background_scan_page" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Width,&#xA;                                     Factor=0}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Width,&#xA;                                     Factor=1}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Height,&#xA;                                     Factor=0}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     Property=Height,&#xA;                                     Factor=1}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="menu_controller_width" Width="0" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Opacity="1" BackgroundColor="White" Grid.Row="0" Grid.Column="1" Margin="-6,0,0,0" Orientation="Vertical">
+                    <StackLayout BackgroundColor="White" Margin="0">
+                        <StackLayout Margin="0,0,0,0">
+                            <StackLayout Margin="0,0,0,0" HeightRequest="92" BackgroundColor="#6aa2b8">
+                                <StackLayout Orientation="Horizontal" >
+                                    <StackLayout Margin="0,0,0,0" WidthRequest="60" Orientation="Horizontal" HorizontalOptions="Start">
+                                        <Image x:Name="hamburger_icon" Margin="4,24,0,0" HeightRequest="56" Scale="1" Source="hamburger_icon.png" HorizontalOptions="Start">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="back_button" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image x:Name="hamburger_icon_home" IsVisible="true" Margin="4,24,0,0" HeightRequest="56" WidthRequest="1" Scale="1" Source="back_menu_puck.png" HorizontalOptions="Start">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="back_button_home" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                    <StackLayout Margin="0,24,0,0"  HorizontalOptions="CenterAndExpand" Orientation="Vertical">
+                                        <Image x:Name="aclara_logo" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Scale="1" WidthRequest="149" HeightRequest="35" IsEnabled="false" Source="logo.png">
+                                        </Image>
+                                    </StackLayout>
+                                    <!--<StackLayout Margin="-20,34,-20,-44" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Image x:Name="aclara_logo" Scale="1" WidthRequest="256" HeightRequest="128" IsEnabled="false" Margin="0,-64,0,0" Source="aclara_logo_menu.png">
+                                        </Image>
+                                    </StackLayout>-->
+                                    <StackLayout Margin="0,24,10,0" Opacity="1" Orientation="Horizontal" HorizontalOptions="End">
+                                        <Image Margin="8,4,0,0" HeightRequest="56" Scale="1" Opacity="0.95" Source="refreshsignal.png">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="refresh_signal" NumberOfTapsRequired="1" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <!--  Aqui va la listview -->
+                    </StackLayout>
+                    <ListView Opacity="1" IsPullToRefreshEnabled="true" x:Name="DeviceList" RowHeight="160" SeparatorVisibility="None" SeparatorColor="#6aa2b8" BackgroundColor="White" IsRefreshing="{Binding IsBusy, Mode=OneWay}" ItemTapped="OnMenuItemSelectedListDevices">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Controls:ViewCellTransparent>
+                                    <StackLayout Margin="0,0,0,0" Scale="1" Padding="16" Orientation="Horizontal">
+                                        <Image HeightRequest="108" Margin="4,0,0,0" Source="ble_puck_icon.png" />
+                                        <StackLayout Margin="8,0,0,0" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <!-- {Binding Name} -->
+                                            <Label FontSize="32" Text="{Binding deviceName}">
+                                            </Label>
+                                            <Label Margin="4,-4,0,0" FontSize="22" Text="{Binding deviceMacAddress}">
+                                            </Label>
+                                            <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" VerticalOptions="Center">
+                                                <Image Source="{Binding deviceBatteryIcon} " HeightRequest="34" VerticalOptions="Center" />
+                                                <Label Margin="-2,2,0,-2" Text="{Binding deviceBattery}" FontSize="14" VerticalOptions="Center">
+                                                </Label>
+                                                <Image Source="{Binding deviceRssiIcon}" HeightRequest="20" VerticalOptions="Center" />
+                                                <Label Margin="-2,2,0,0" Text="{Binding deviceRssi}" FontSize="14" VerticalOptions="Center">
+                                                </Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Controls:ViewCellTransparent>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                 </StackLayout>
+            </Grid>
+        </ContentView>
+        <Image Source="shadoweffect" Margin="298,0,0,0" Opacity="0.75" IsVisible="false" WidthRequest="29" HeightRequest="1024" x:Name="shadoweffect">
+        </Image>
+        <!-- Menu desplegable ContentNav   -->
+        <ContentView x:Name="ContentNav" BackgroundColor="#6aa2b8" WidthRequest="310" IsVisible="true" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0}"
+                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+            <views:MenuView x:Name="MenuOptions" />
+        </ContentView>
+        <!--  backdark_bg  -->
+        <StackLayout InputTransparent="true" x:Name="backdark_bg" BackgroundColor="Gray" HeightRequest="1024" Margin="0,92,0,0" IsVisible="false" WidthRequest="1500" Opacity="0.6">
+        </StackLayout>
+  
+        <!--  indicator -->
+        <StackLayout InputTransparent="true" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                 Property=Height,&#xA;                                 Factor=0}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                 Property=Height,&#xA;                                 Factor=1}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                 Property=Width,&#xA;                                 Factor=1}">
+            <ActivityIndicator Color="#6aa2b8" Opacity="1" x:Name="indicator" IsVisible="false" IsRunning="true" Scale="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+
+        <!--  DIALOGOS -->
+        <Image BackgroundColor="Black" x:Name="dialog_open_bg" WidthRequest="1500" IsVisible="false" HeightRequest="1024" Opacity="0.5">
+        </Image>
+        <ContentView Scale="1.1" IsVisible="false" HeightRequest="230" x:Name="turnoff_mtu_background" 
+                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     
+            Property=Width,&#xA;                                     
+            Factor=0.19}" 
+                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                     
+            Property=Width,&#xA;                                     
+            Factor=0.620}" 
+                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,&#xA;                                    
+            Property=Height,&#xA;                                     
+            Factor=0.4}">
+            <views:DialogsView x:Name="DialogView"/>
+        </ContentView>
+    </RelativeLayout>
+</util:BasePage>
